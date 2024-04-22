@@ -1,0 +1,164 @@
+<!--category.html-->
+{% extends "main.html" %}
+{% load static %}
+{% block title %}
+
+  <title>{{ category_name }}</title>
+
+
+{% endblock title %}
+
+{% block body %}
+<style>
+.custom-div {
+  position: relative;
+  text-align: center;
+  padding: 20px;
+  background-color: #0766AD;
+}
+
+.custom-text {
+  color: #ffffff;
+  font-size: 40px;
+}
+
+
+
+</style>
+
+
+
+<div class="custom-div">
+    <h1 class="custom-text">
+        {{ subcategory.Category.Name }}
+    </h1>
+</div>
+
+
+
+
+
+
+
+<div style=" display: block; text-align: right;">
+    <h1 style="padding-top: 40px; padding-bottom: 30px; font-size: 30px; margin-right: 20px; display: inline-block;">
+        {{ subcategory.Name }}    </h1>
+    <!-- Other content related to the subcategory goes here -->
+  </div>
+
+{% if products %}
+
+
+
+  <div class="container" style="max-width: 100em;
+  
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  margin: auto;
+  min-height: 50em;
+  padding: 3em 1em 1em 1em;
+  box-sizing: border-box;
+  ">
+
+
+      {% for product in products %}
+      <div class="card-1 card-div">
+        <div class="gow-img-div img-div" style="position: relative;">
+          <span style="position: absolute; top: -10px; right: 80%; color: white; padding: 2px 5px;">
+            <img src="{% static 'images/download.png' %}" style="height: 30px; width: 60px;" alt="">
+          </span>
+          <img src="{{ product.product_image_set.first.Image.url }}" alt="{{ product.Product_name }} Image">
+    
+      </div>
+        <div class="text-container" style="padding-top: 150px;">
+          <a href="{% url 'product_detail' pk=product.pk %}" style="text-decoration: none;"><h2 class="item-name">{{ product.Product_name }}</h2></a>
+          <p class="date">{{ product.Category.Name }}</p>
+          <div class="pricing-and-cart">
+            <div class="pricing">
+              <p class="previous-price"> {{ product.discounted_price }}</p>
+              <p class="current-price">{{ product.price }}LE</p>
+            </div>
+            <a href="#" class="add-to-cart" data-product-id="{{ product.pk }}">
+              <i class="fas fa-shopping-cart"></i>
+          </a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+    </div>
+ 
+ 
+ 
+ 
+ 
+    {% else %}
+    <h1 style="text-align: center; margin: 100px;">لا يوجد منتجات</h1>
+  {% endif %}
+
+
+
+  <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+      console.log('JavaScript is running!');
+  
+      // Smooth scroll to subcategory sections
+      document.querySelectorAll('.subcategory-link').forEach(function (link) {
+        link.addEventListener('click', function (event) {
+          event.preventDefault();
+  
+          var subcategoryId = this.getAttribute('data-subcategory-id');
+          console.log('Subcategory ID:', subcategoryId);
+  
+          var targetSection = document.getElementById(subcategoryId);
+          console.log('Target Section:', targetSection);
+  
+          if (targetSection) {
+            targetSection.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+    });
+  </script>
+  
+  <script>
+    $(document).ready(function () {
+        $('.add-to-cart').on('click', function (event) {
+            event.preventDefault(); // Prevent the default behavior (following the link)
+    
+            var productId = $(this).data('product-id');
+            var clickedButton = $(this); // Store the clicked button
+    
+            $.ajax({
+                type: 'POST',
+                url: '{% url "add_to_cart" product_id=0 %}'.replace('0', productId),
+                data: {
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function (response) {
+                    // Check if the response contains a success message
+                    if (response.message) {
+                        // Get the parent card container using the stored variable
+                        var cardContainer = clickedButton.closest('.card-1');
+
+                        // Insert the success message inside the card
+                        cardContainer.append('<div class="alert alert-success">' + response.message + '</div>');
+
+                        // You can also use fade effects or other animations
+                        cardContainer.find('.alert-success').fadeIn().delay(3000).fadeOut();
+                    }
+    
+                    // Update the cart icon or handle any other response
+                },
+                error: function (error) {
+                    console.log('Error:', error);
+                }
+            });
+        });
+    });
+</script>
+
+
+{% endblock body %}

@@ -1,0 +1,554 @@
+
+    /* Custom CSS styles */
+    body {
+      background-color: #fdfdfd;
+      direction: rtl;
+      font-family: 'Noto Kufi Arabic', sans-serif;
+    }
+    .col-6 > a {
+        display:block;
+      }
+    /* Custom navigation bar styling */
+    .navbar {
+      padding: 8px 16px;
+      background-color: #ffffff;
+    }
+    
+    .navbar-brand img {
+      width: 50px;
+      height: 50px;
+      margin-right: 8px;
+    }
+    
+    .navbar-nav .nav-item {
+      margin-left: 8px;
+    }
+    
+    .nav-link {
+      color: #0766AD; /* Changed text color to #29ADB2 */
+      font-size: 18px;
+      font-weight: bold;
+      margin-right: 15px;
+    }
+    
+    .nav-link.btn {
+      padding: 8px 16px;
+      color: #0766AD; /* Changed text color to #C5E898 */
+    }
+    
+    .nav-link.btn:hover {
+      background-color: #102434;
+      border: 1px solid #01030f;
+      color: #000000;
+      opacity: .9;
+    }
+    
+    .vertical-line {
+      border-left: 2px solid #0766AD; /* Adjust the color and thickness as desired */
+      margin-left: 20px; /* Adjust the margin as desired */
+    }
+    .nav-link:hover,
+    .nav-link:focus {
+      color: #000000;
+    }
+    
+    .search-bar {
+      display: flex;
+      align-items: center;
+    }
+    
+    .search-bar input[type="text"] {
+      height: 36px;
+      width: 350px;
+      padding: 12px;
+      border: 0px;
+      outline: none;
+     
+      margin-right: 10px;
+      
+    }
+    
+    .search-bar .fa-search {
+      color: #0766AD;
+      margin-right: 5px;
+    }
+    
+    .navbar-nav.left-side {
+      margin-left: auto;
+    }
+    
+    .navbar-nav.left-side .nav-item {
+      margin-top: 10px;
+    }
+    .nav-item2 .nav-link{
+      color: #000000;
+      font-size: 15px;
+      text-align: right;
+    }
+    .dropdown-menu {
+      text-align: right;
+    }
+    
+ 
+    .carousel-item {
+    opacity: .9;
+    transition: opacity 0.9s ease-in-out; /* Reduced transition time */
+  }
+
+  .carousel-item.active {
+    opacity: 1;
+    transition: opacity 0.9s ease-in-out; /* Reduced transition time */
+  }
+  
+  .carousel-item-next.carousel-item-left,
+  .carousel-item-prev.carousel-item-right {
+    opacity: .9;
+    transition: opacity 0.9s ease-in-out; /* Reduced transition time */
+  }
+  
+  .carousel-item-next,
+  .carousel-item-prev {
+    transform: none !important;
+  }
+  
+  .carousel-control-prev,
+  .carousel-control-next {
+    opacity: 0.5;
+  }
+  
+  .carousel-control-prev:hover,
+  .carousel-control-next:hover {
+    opacity: 1;
+  }
+ /* Custom CSS to make carousel images full width */
+ #carouselExampleDark .carousel-item {
+      width: 100vw; /* Set the width to 100% of the viewport width */
+      height: 70vh; /* Set the height to 70% of the viewport height */
+    }
+
+    #carouselExampleDark .carousel-item img {
+      object-fit: cover; /* Ensure the image covers the entire slide */
+      width: 100%; /* Set the width to 100% of the carousel item */
+      height: 70vh; /* Set the height to 70% of the carousel item */
+    }
+
+    .carousel-caption {
+      bottom: 40%; /* Adjust the value as needed */
+      top: auto !important;
+    }
+
+    .carousel-caption h5 {
+      text-align: right;
+      color: #0a53be
+      ;
+      font-size: 40px;
+      
+      animation-duration: 1s;
+      animation-fill-mode: both;
+    }
+
+    .carousel-caption p {
+      text-align: right;
+      color: rgb(5, 3, 3);
+      font-size: 15px;
+      font-weight: 900;
+      
+      animation-duration: 1s;
+      animation-fill-mode: both;
+    }
+
+    .carousel-caption .button-container {
+      display: flex;
+      justify-content: right;
+      
+      animation-duration: 1s;
+      animation-fill-mode: both;
+    }
+
+    .carousel-caption .button-container button {
+      margin-left: 10px; /* Adjust the value as needed */
+      
+      animation-duration: 1s;
+      animation-fill-mode: both;
+    }
+
+    /* Define different animations for each caption */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .dropdown-submenu {
+      position: relative;
+    }
+    
+    .dropdown-submenu .dropdown-menu {
+      top: 0;
+      right:  100%;
+      margin-top: -1px;
+      display: none;
+      position: absolute;
+      z-index: 1000;
+    }
+    
+    .dropdown-submenu:hover .dropdown-menu {
+      display: block;
+    }
+/* CSS styles for the scrolled state of the navigation bar */
+.navbar.scrolled {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  animation: slideDown 0.3s ease-in-out;
+  opacity: .7;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+  .sectionClass {
+  padding: 20px 0px 50px 0px;
+  position: relative;
+  display: block;
+}
+
+.fullWidth {
+  width: 100% !important;
+  display: table;
+  float: none;
+  padding: 0;
+  min-height: 1px;
+  height: 100%;
+  position: relative;
+}
+
+
+
+
+
+.headerLine {
+  width: 160px;
+  height: 2px;
+  display: inline-block;
+  background: #101F2E;
+}
+
+
+.projectFactsWrap{
+    display: flex;
+  margin-top: 30px;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+
+#projectFacts .fullWidth{
+  padding: 0;
+}
+
+.projectFactsWrap .item{
+  width: 25%;
+  height: 100%;
+  padding: 50px 0px;
+  text-align: center;
+}
+
+
+
+.projectFactsWrap .item p.number{
+  font-size: 40px;
+  padding: 0;
+  font-weight: bold;
+}
+
+.projectFactsWrap .item p{
+  color: #0766AD;
+  font-size: 18px;
+  margin: 0;
+  padding: 10px;
+  
+}
+
+
+.projectFactsWrap .item span{
+  width: 60px;
+  background: #0766AD;
+  height: 2px;
+  display: block;
+  margin: 0 auto;
+}
+
+
+.projectFactsWrap .item i{
+  vertical-align: middle;
+  font-size: 50px;
+  color: #0766AD;
+}
+
+
+
+
+
+
+
+
+
+
+.filter, .subfilter{
+    list-style: none;
+    line-height: 2;
+    padding-left: 30px;
+}
+
+.subfilter{
+    color: slategray;
+    padding-left: 0;
+}
+
+.container{
+    position: relative;
+    
+    width: 100%;
+}
+
+#sort{
+    position: absolute;
+    top: 10px;
+    right:25px;
+}
+
+.catalogue{
+    position: absolute;
+    top: 40px;
+    width:100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.products{
+    height: 300px;
+    width: 200px;
+    margin: 10px;
+
+}
+
+.products:hover{
+    box-shadow: 0 0 2px 0 rgb(184, 180, 180);
+    border-radius: 2px;
+}
+
+.products a{
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
+.products img{
+    height: 250px;
+    width: 100%;
+}
+
+.products .price{
+    color: hotpink;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.products .mrp{
+    font-size: 14px;
+    text-decoration: line-through;
+    margin-left: 5px;
+}
+
+.products i{
+    font-size: 16px;
+    float: right;
+}
+
+
+
+
+
+
+
+
+
+
+:root{
+    font-size: 16px;
+   
+    --heading-color: hsl(0, 0%, 7%);
+    --date-text-color: hsl(0, 0%, 51%);
+    --previous-price-text-color: hsl(0, 98%, 44%);
+    --current-price-text-color: hsla(0, 0%, 0%, 0.822);
+    --liked-heart-icon-color: hsl(0, 98%, 44%);
+    --heart-icon-color: whitesmoke;
+    --pricing-font-weight: 800;
+    --title-font-weight: 800;
+    --date-font-weight: 550;
+
+    /* Cards colors */
+    --card-main-color : whitesmoke;
+    --card-1-secondary-color: #dedede;
+    --card-2-secondary-color: rgb(67,53,27);
+    --card-3-secondary-color: rgb(178,180,179);
+    --card-4-secondary-color: rgb(96,109,117);
+}
+
+
+
+
+.card-div {
+    width: calc(25% - 1.2em);
+    min-height: 20em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--card-main-color);
+    margin: 0.6em;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: transform 0.2s ease-in-out;
+    margin-top: 70px;
+  }
+
+/* ======== General styling of all cards and heart divs ========== */
+.img-div{
+    width: 100%;
+    height: 10em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+    z-index: 1;
+    border-radius: 0 0 10px 10px;
+}
+
+.img-div img{
+    
+    transform-origin: bottom;
+    transform: translateY(5.5%);
+    transition: transform 0.3s ease-in-out
+}
+
+
+
+
+
+
+
+/* God of war image and heart-background*/
+.gow-img-div{
+    background-color: var(--card-1-secondary-color);
+}
+
+.gow-img-div img{
+    width: 80%;
+    transform: translateY(7.5%);
+    /* background-color: whitesmoke; */
+}
+
+
+
+
+
+
+
+
+/* ======== text Container Styling general ======== */
+
+.text-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* background-color: yellow; */
+    padding: 0 1.5em;
+    padding-top: 7em;
+    padding-bottom: 1em;
+    box-sizing: border-box;
+}
+
+.text-container .item-name,
+.text-container .date{
+    margin: 0.25em 0;
+    text-align: center;
+}
+
+.text-container .item-name{
+    font-size: 1.2em;
+    font-weight: var(--title-font-weight);
+    color: var(--heading-color);
+}
+
+.text-container .date{
+    font-size: 0.9em;
+    font-weight: var(--date-font-weight);
+    color: var(--date-text-color);
+}
+
+/* === Pricing and cart div  ===== */
+.pricing-and-cart{
+    /* background-color: wheat; */
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0.25em 0 1em 0;
+}
+
+.pricing{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.previous-price{
+    font-size: 0.8rem;
+    font-weight: var(--pricing-font-weight);
+    color: var(--previous-price-text-color);
+    text-decoration: line-through;
+    /* background-color: whitesmoke; */
+    text-align: left;
+}
+
+.current-price{
+    color: var(--current-price-text-color);
+    font-size: 1.3rem;
+    font-weight: var(--pricing-font-weight);
+    /* background-color: yellow; */
+    margin: 0;
+}
+
+.pricing-and-cart{
+    width: 100%;
+}
+
+.fa-shopping-cart{
+    font-size: 1.3rem;
+    top: 0;
+    transform: translateY(50%);
+}
+
+
+/* ====== Hover effects ======= */
+.card-div:hover .img-div img{
+    transform: translateY(7.5%) scale(1.1);
+}
+
+.card-div:hover{
+    transform: translate(0, -10px);
+}

@@ -1,0 +1,6 @@
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h3>Add Images for {{ product.Product_name }}</h3>
+    {{ image_form.as_p }}
+    <button type="submit">Add Images</button>
+</form>

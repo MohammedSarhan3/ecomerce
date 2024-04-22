@@ -1,0 +1,289 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block title %}
+  <title>الرئيسية</title>
+  {% endblock title %}
+  <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/home.css'%}">
+  
+      <script src="https://kit.fontawesome.com/ddf16626a9.js" crossorigin="anonymous"></script>
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+{% block style %}
+
+{% endblock style %}
+</head>
+<body>
+  <div class="container" style="max-width: 100%;">
+    <nav class="navbar navbar-expand-lg scroll-nav" style="max-width: 100%; background-color: #e4e4e4;">
+        <a class="navbar-brand" href="#">
+            <i class="fa-solid fa-bag-shopping fa-xl" style="color: #0766AD;"></i>
+        </a>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto align-items-center order-first">
+                <li class="nav-item">
+                    <img src="{% static 'images/e.png' %} " style="width: 40px; height: 40px; margin-top: 10px;" alt="">
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" style="font-size: 10px;" href="{% url 'profile' %}">
+                        مرحبا بك
+                        <p style="font-size: 12px;">
+                          {{ user.first_name}} {{ user.last_name|slice:":5" }}
+                        </p>
+                    </a>
+                </li>
+               
+                {% endif %}
+              
+                <li class="nav-item search-bar" style="margin-right: 70px;">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="أنت بتدور علي إيه؟">
+                    </div>
+                </li>
+            </ul>
+            
+            <ul class="navbar-nav ml-auto align-items-end text-right">
+                {% if user.is_authenticated %}
+                    <!-- If user is logged in, display "حسابي" and "عربة التسوق" -->
+                    <li class="nav-item" style="text-align: left; margin-right: 100px;" >
+                      <a class="nav-link" style="font-size: 14px; position: relative;" href="{% url 'cart_detail' %}">
+                          عربة التسوق
+                          <i class="fa-solid fa-cart-plus"></i>                          
+                      </a>
+                  </li>
+                    <li class="nav-item" style="text-align: left; " >
+                        <a class="nav-link" style="font-size: 14px; position: relative;" href="{% url 'order_list' %}">
+                          <span class="vertical-line"></span>
+  
+الطلبات                         
+ <i class="fa-solid fa-truck-fast"></i>                            
+                        </a>
+                    </li>
+
+                    <li class="nav-item" style="text-align: left;">
+                      <a class="nav-link" style="font-size: 14px;" href="{% url 'profile' %}">
+                        <span class="vertical-line"></span>
+
+                          حسابي
+                          <i class="fa-regular fa-user"></i>
+                      </a>
+                  </li>
+                    <li class="nav-item">
+                      <a class="nav-link" style="font-size: 14px; text-align: left;" href="{% url 'logout' %}">
+                        <span class="vertical-line"></span>
+
+                          تسجيل الخروج
+                          
+                      </a>
+                  </li>
+                {% else %}
+                    <!-- If user is not logged in, display "تسجيل الدخول" and "إنشاء حساب" -->
+                    <li class="nav-item" style="margin-right: 480px;">
+                        <a class="nav-link" style="font-size: 14px;" href="{% url 'login' %}">
+                            تسجيل الدخول
+                            <i class="fa-regular fa-user"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item" style="text-align: left;">
+                        <a class="nav-link" style="font-size: 14px;" href="{% url 'register_view' %}">
+                            <span class="vertical-line"></span>
+                            إنشاء حساب
+                            <i class="fa-solid fa-user-plus"></i>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+</div>
+
+
+
+<div class="container" style="max-width: 100%; height: 40px; z-index: 1;">
+  <nav class="navbar navbar-expand-lg scroll-nav" style="max-width: 100%; height: 40px; text-align: right;">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav left-side justify-content-end"> <!-- Modified line -->
+        <li class="nav-item2 dropdown" style="margin-left: 30px;">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">جميع الفئات</a>
+          <div class="dropdown-menu"  style=" z-index: 1;" aria-labelledby="navbarDropdown" id="categoryDropdown">
+            
+          </div>
+        </li>
+
+        <li class="nav-item2">
+          <a class="nav-link" href="{% url 'home' %}">الرئيسية</a>
+        </li>
+   
+        <li class="nav-item2" id="categoryDropdowns">
+          
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+
+
+
+{% block body %}
+{% endblock body %}
+
+
+
+
+
+<!-- Footer -->
+
+<div class="">
+<div class="" style="background-color: #e4e4e4; ">
+
+<div class="row d-flex"style="padding-top: 30px;">
+
+<div class="col-md-12 col-lg-3 mb-3" >
+
+<img src="{% static 'images/8.png' %} " width="200" height="150" style="border-radius:20% ;"></img>
+<p class="mt-4 text-muted">© جميع الحقوق محفوظة لدي كلية الإقتصاد المنزلي جامعة العريش 2023 - 2024</p>
+
+</div>
+
+ 
+<div class="col-6 col-sm-6 col-md-4 col-lg-2">
+   
+ <h6 class="h6 fw-bold">الفئات</h6>
+
+   <a 
+      href="#" class="text-decoration-none text-muted"> الجلود</a>
+  <a 
+     href="#" class="text-decoration-none text-muted"> الملابس والنسيج</a>
+  <a 
+     href="#" class="text-decoration-none text-muted">الاغذية</a>
+ 
+</div>
+
+
+<div class="col-6 col-sm-6 col-md-4 col-lg-2 mt-3 mt-md-0">
+ <h6 class="h6 fw-bold">الدعم</h6>
+ <a href="#" class="text-decoration-none text-muted">الدعم عبر الهاتف</a>
+ 
+  <a href="#" class="text-decoration-none text-muted"><i class="fa-solid fa-phone"></i> 1589</a>
+  <a href="#" class="text-decoration-none text-muted">مركز المساعدة</a>
+  <a href="#" class="text-decoration-none text-muted"><i class="fa-solid fa-exclamation"></i> help.aru.com</a>
+
+  <a href="#" class="text-decoration-none text-muted">الدعم عبر البريد الإلكتروني</a>
+  <a href="#" class="text-decoration-none text-muted"><i class="fa-solid fa-envelope"></i> egypt@aru.com</a>
+
+</div>
+
+
+
+
+
+</div><!--row div-->
+<script>
+  
+	$.fn.jQuerySimpleCounter = function( options ) {
+	    var settings = $.extend({
+	        start:  0,
+	        end:    100,
+	        easing: 'swing',
+	        duration: 400,
+	        complete: ''
+	    }, options );
+
+	    var thisElement = $(this);
+
+	    $({count: settings.start}).animate({count: settings.end}, {
+			duration: settings.duration,
+			easing: settings.easing,
+			step: function() {
+				var mathCount = Math.ceil(this.count);
+				thisElement.text(mathCount);
+			},
+			complete: settings.complete
+		});
+	};
+
+
+$('#number1').jQuerySimpleCounter({end: 4596,duration: 4000});
+$('#number2').jQuerySimpleCounter({end: 1250,duration: 2500});
+$('#number3').jQuerySimpleCounter({end: 2600,duration: 3000});
+$('#number4').jQuerySimpleCounter({end: 16,duration: 2000});
+
+
+
+  	/* AUTHOR LINK */
+     $('.about-me-img').hover(function(){
+            $('.authorWindowWrapper').stop().fadeIn('fast').find('p').addClass('trans');
+        }, function(){
+            $('.authorWindowWrapper').stop().fadeOut('fast').find('p').removeClass('trans');
+        });
+  
+
+   // Get the navigation bar element
+   const navbar = document.querySelector('.navbar');
+
+// Function to add a class to the navigation bar when scrolling down
+function handleScroll() {
+  if (window.scrollY > 0) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+}
+
+// Add an event listener to the window's scroll event
+window.addEventListener('scroll', handleScroll);
+
+
+</script>
+<script>
+  $(document).ready(function() {
+      // Fetch and load the category view content
+      $.ajax({
+          url: "{% url 'category_view' %}",  // Check if this URL is correct
+          type: 'GET',
+          success: function(data) {
+              $('#categoryDropdown').html(data);
+              console.log("Category view AJAX request successful");
+          },
+          error: function(error) {
+              console.log("Category view AJAX request failed");
+              console.log(error);
+          }
+      });
+  
+      // Fetch and load the selected subcategories
+      $.ajax({
+          url: "{% url 'selected_subcategories' %}",
+          type: 'GET',
+          success: function(data) {
+              console.log("Selected subcategories AJAX request successful");
+              $('#categoryDropdowns').html(data);
+          },
+          error: function(error) {
+              console.log("Selected subcategories AJAX request failed");
+              console.log(error);
+          }
+      });
+  });
+  </script>
+  
+</body>
+</html>

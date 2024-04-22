@@ -1,0 +1,100 @@
+{% extends "main.html" %}
+  {% load static %}
+  {% block title %}
+  <title>عربة التسوق</title>
+  {% endblock title %}
+  {% block body %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %} ">
+  <div class="container">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5 style="display: inline-block;">المنتجات في عربة التسوق</h5>
+                        <span class="pull-left" style="display: inline-block; float: left;"> عدد المنتجات(<strong>{{ cart_items_count }}</strong>)</span>
+                    </div>
+                    
+                    <div class="ibox-content">
+                        <div class="table-responsive">
+                            <table class="table shoping-cart-table">
+                                <tbody>
+                                    {% for cart_product in cart_products %}
+                                        <tr>
+                                            <td width="90">
+                                                <img src="{{ cart_product.Product.product_image_set.first.Image.url }}" alt="" width="120">
+                                            </td>
+                                            <td class="">
+                                                <h3>
+                                                <a href="{% url 'product_detail' pk=cart_product.Product.pk %}" class="text-navy">
+                                                 {{ cart_product.Product.Product_name }}
+                                                                     </a>
+                                                </h3>
+                                                <p class="small">
+                                                    {{ cart_product.Product.Description }}
+                                                </p>
+                                                <div class="m-t-sm">
+                                                    |
+
+                                                    <a class="text-danger" href="{% url 'remove_from_cart' cart_product_id=cart_product.pk %}" class="text-muted"><i class="fa fa-trash"></i>  حذف</a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                {{ cart_product.Product.price }}LE x {{ cart_product.Quantity }}
+                                                {% if cart_product.Product.discounted_price %}
+                                                    <s class="small text-muted">{{ cart_product.Product.discounted_price }}LE</s>
+                                                {% endif %}
+                                            </td>
+                                           
+                                            <td>
+                                                <h4>
+                                                    {{ cart_product.total_price }}LE
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+
+                        <a href="{% url 'checkout' %}" style="text-decoration: none;">   <button class="btn btn-primary pull-right"><i class="fa fa fa-shopping-cart"></i> الدفع</button>
+                                </a>
+<a href="{% url 'home' %}"><button class="btn btn-white pull-left" style=" float: left;"> مواصلة التسوق<i class="fa fa-arrow-left"></i></button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>ملخص الطلب</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <span>
+                            الإجمالي
+                        </span>
+                        <h2 class="font-bold">
+                            {{ cart.Total_price  }}LE
+                        </h2>
+                        <hr>
+                        <span class="text-muted small">
+                            يتم حساب مصاريف الشحن والضرائب المفروضة حسب الموقع وطريقة الدفع ومدة التوصيل
+                        </span>
+                        <div class="m-t-sm">
+                            <div class="" style="margin-top: 20px;">
+                                <a href="{% url 'checkout' %}" style="text-decoration: none;">   <button class="btn btn-primary pull-right"><i class="fa fa fa-shopping-cart"></i> الدفع</button>
+                                </a>
+                                <a href="#" class="btn btn-danger ">إلغاء</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Additional content such as recommended products can be added here -->
+            </div>
+        </div>
+    </div>
+    
+    </div>
+   
+    {% endblock body %}

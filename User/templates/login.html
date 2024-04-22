@@ -1,0 +1,134 @@
+
+{% extends "main.html" %}
+{% load static %}
+
+  {% block title %}
+    <title> تسجيل الدخول</title>
+    {% endblock title %}
+  {% block body %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300&display=swap" rel="stylesheet">
+  <style>
+    .bg{
+      /*background-color: #5BC5B1;*/
+      background-image:url({% static 'images/9.jpg' %} ) ;
+      background-repeat: no-repeat;
+      background-size: cover;
+      font-family: 'Noto Kufi Arabic', sans-serif;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+  }
+  .containe {
+    max-width: 800px;
+    height: 500px;
+    border-radius: 20px;
+    margin: 0 auto;
+    margin-top: 50px;
+    background-color: #A8E8DA;
+    opacity: .8;
+    background-repeat: no-repeat;
+    margin-bottom: 150px;
+  }
+  .form-group{
+      text-align: right;
+  }
+  .form{
+      padding-top: 10px;
+  }
+  .form-group label {
+    font-weight: bold;
+  }
+  .form-group input {
+      background-color: #F0F0F0;
+      
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    
+  }
+  .form-group input:focus {
+    outline: none;
+    box-shadow: 0 0 5px #6c757d;
+  }
+  .btn-primary {
+      margin-top: 20px;
+      border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: bold;
+  }
+ 
+  .btn-link {
+      
+    font-weight: bold;
+    border-radius: 5%;
+  }
+  .leftside{
+      background-color: #ffffff;
+      margin-top: 20px;
+      border-radius: 20px;
+      height: 480px;
+  }
+ .down{
+  padding-top: 20px;
+ }
+  .btnn{
+   margin-right: 50px;
+  max-width: 80%;
+  }
+.rightside{
+  padding-top: 170px;
+  text-align: right;
+  color: rgb(12, 64, 235);
+  padding-right: 50px;
+}
+    
+  </style>
+    <script src="https://kit.fontawesome.com/ddf16626a9.js" crossorigin="anonymous"></script>
+
+</head>
+<body class='bg'>
+  <div class="containe">
+    <div class="row">
+      <div class="col-sm-6 rightside">
+        <i class="fa-solid fa-cart-shopping fa-flip fa-9x" style="color: rgb(12, 64, 235);"></i>
+           <h2>مرحبًا بعودتك!</h2> 
+        <p>متجر كلية الإقتصاد المنزلي جامعة العريش</p>
+
+      </div>
+      <div class="col-sm-6 leftside">
+        <div class="text-center down">
+          <h2>تسجيل الدخول</h2>
+          <p>قم بتسجيل الدخول واستمتع بالتسوق</p>
+        </div>
+        <form class="form" method="POST" action="{% url 'login' %}">
+                {% csrf_token %}
+          <div class="form-group">
+            <input type="email" class="form-control" name="username" id="username" placeholder="البريد الإلكتروني">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" name="password" id="password" placeholder="كلمة المرور">
+          </div>
+          {% if form.errors %}
+    <p class="alert alert-danger" style="font-size: 14px; text-align:center;">يرجي التأكد من  البريد الإلكتورني وكلمة السر  </p> 
+{% endif %}
+          <button type="submit" class="btn btn-primary btn-block btnn">تسجيل الدخول</button>
+          <div class="text-center mt-3">
+            <p>أو سجل الدخول بإستخدام</p>
+           <a href="" class="link"><i class="fa-brands fa-facebook  fa-xl"></i></i></a> 
+           <a href=""><i class="fa-brands fa-google  fa-xl"></i></a> 
+          </div>
+          <div class="text-center mt-3">
+         <a href="{% url 'register_view' %}"> <button type="button" class="btn btn-link ">إنشاء حساب جديد</button></a>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
+{% endblock body %}

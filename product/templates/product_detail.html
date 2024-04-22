@@ -1,0 +1,153 @@
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/detail.css' %}">
+
+{% endblock style %}
+
+{% block title %}
+<title>{{ title }}</title>
+
+{% endblock title %}
+{% block body %}
+
+<style>
+    .alert-success {
+    background-color: #dff0d8; /* Light green background color */
+    color: #3c763d; /* Dark green text color */
+    padding: 10px;
+    margin-top: 20px;
+    border: 1px solid #d6e9c6; /* Light green border */
+    border-radius: 5px;
+    width: 280px;
+    text-align: center;
+}
+</style>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-5" style="margin-top: 150px;">
+            
+            <div class="gow-img-div img-div">
+                <img src="{{ product.product_image_set.first.Image.url }}" alt="{{ product.Product_name }} Image">
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="main-description px-2">
+                <div class="category text-bold">
+                    الفئة: {{ product.Category.Name }}
+                </div>
+                <div class="product-title text-bold my-3">
+                    {{ product.Product_name }}
+                </div>
+                <div class="price-area my-4">
+                    <p class="old-price mb-1">
+                        {% if product.discount_percentage %}
+                            <del>{{ product.price }}جنيه</del> 
+                            <span class="old-price-discount text-danger">({{ product.discount_percentage }}% خصم)</span>
+                            {{ product.price }}جنيه
+                        {% endif %}
+                    </p>
+                                        <p class="new-price text-bold mb-1">{{ product.price }}جنيه</p>
+                </div>
+                
+                <div class="buttons  my-5">
+                    <form action="{% url 'add_to_cart' product_id=product.pk %}" style="display: flex;" method="post" class="add-to-cart-form" data-product-id="{{ product.pk }}">
+                        {% csrf_token %}
+                        <div class="block quantity">
+                            <input type="number" class="form-control" id="cart_quantity" value="1" min="0" max="5" placeholder="Enter email" name="cart_quantity">
+                        </div>
+                        <div class="block">
+                            <button type="button" class="shadow btn custom-btn add-to-cart-btn">أضف للعربة</button>
+                        </div>
+                    </form>
+            </div>
+            <div class="product-details my-4">
+                <p class="details-title text-color mb-1">تفاصيل المنتج</p>
+                <p class="description">
+                    {{ product.describtion }}
+                </p>
+            </div>
+            <div class="delivery my-4">
+                <p class="font-weight-bold mb-0"><span><i class="fa-solid fa-truck"></i></span> <b>توصيل في غضون 3 أيام من تاريخ الشراء</b></p>
+                <p class="text-secondary">اطلب الآن للحصول على التوصيل</p>
+            </div>
+            <div class="delivery-options my-4">
+                <p class="font-weight-bold mb-0"><span><i class="fa-solid fa-filter"></i></span> <b>خيارات الدفع</b></p>
+                <p class="text-secondary">   
+                    البطاقات الائتمانية (Visa ،MasterCard و AMEX)
+                    <br>
+                    الدفع نقدا عند الاستلام
+                    <br>
+                    المحافظ الإلكترونية للهاتف المحمول
+                </p>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+
+
+	
+
+	
+<div class="row">
+    <h3 style="padding-right: 30px;">صور أخري للمنتج</h3>
+    <div class="col-md-5" style="display: flex; justify-content: space-between; align-items: center;">
+        {% for image in product.product_image_set.all %}
+            {% if forloop.counter <= 4 %}
+                <img src="{{ image.Image.url }}" alt="{{ product.Product_name }} Image" class="product-image" style="width: 50%;">
+            {% endif %}
+        {% endfor %}
+    </div>
+    <!-- Rest of your product details -->
+</div>
+
+
+
+
+
+
+
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.add-to-cart-btn').on('click', function (event) {
+            event.preventDefault();
+    
+            var form = $(this).closest('form');
+            var productId = form.data('product-id');
+            var clickedButton = $(this);
+    
+            $.ajax({
+                type: 'POST',
+                url: form.attr('action'),
+                data: form.serialize(),
+                success: function (response) {
+                    if (response.message) {
+                        // Get the container div with the class 'buttons'
+                        var buttonsContainer = form.closest('.buttons');
+                        // Append the message under the 'buttons' container
+                        buttonsContainer.append('<div class="alert alert-success">' + response.message + '</div>');
+                        // Fade out the message after 3 seconds
+                        buttonsContainer.find('.alert-success').fadeIn().delay(3000).fadeOut();
+                    }
+                },
+                error: function (error) {
+                    console.log('Ajax error:', error);
+                }
+            });
+        });
+    });
+    
+    
+</script>
+
+
+
+{% endblock body %}

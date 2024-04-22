@@ -1,0 +1,51 @@
+{% extends "main.html" %}
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="text-center"> إضافة رقم هاتف  </h2>
+          </div>
+          <div class="card-body">
+            
+            <form method="post" action="{% url 'manage_phone_numbers' %}" class="mb-4">
+                {% csrf_token %}
+                
+                
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <label class="form-label" for="id_Phone_num">رقم الهاتف</label>
+                    <input type="number" id="id_Phone_num" name="Phone_num" class="form-control" />
+                    <small class="text-danger">{{ form.errors.Phone_num }}</small>
+                </div>
+                
+                
+               
+                
+                <!-- Submit button -->
+                <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block">إضافة</button>
+            </form>
+            <h2>أرقام الهاتف</h2>
+            <ul class="list-group">
+                {% for phone_number in user_phone_numbers %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ phone_number.Phone_num }}
+                        <a href="{% url 'delete_phone_number' phone_number.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    </li>
+                {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+{% endblock body %}

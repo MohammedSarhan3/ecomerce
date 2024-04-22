@@ -1,0 +1,14 @@
+<!--category_view.html-->
+{% for category in categories %}
+  <div class="dropdown-submenu"style="z-index:1;">
+    <a class="dropdown-item dropdown-toggle" href="{% url 'category_detail' category_id=category.Category_id %}">{{ category.Name }}</a>
+    <div class="dropdown-menu" style="z-index: 2;">
+      {% for subcategory in subcategories %}
+        {% if subcategory.Category == category %}
+        <a class="dropdown-item subcategory-link" style="z-index: index 2;" href="{% url 'subcategory_products' subcategory_id=subcategory.Subcategory_id %}" >{{ subcategory.Name }}</a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+{% endfor %}
+

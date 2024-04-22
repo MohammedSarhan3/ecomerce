@@ -1,0 +1,156 @@
+{% extends "main.html" %}
+{% load static %}
+
+
+  {% block title %}<title>  إنشاء حساب</title>{% endblock title %}
+    
+  {% block body %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300&display=swap" rel="stylesheet">
+  <style>
+    
+    .bg{
+        /*background-color: #5BC5B1;*/
+        background-image:url({% static 'images/9.jpg' %} ) ;
+        background-repeat: no-repeat;
+        background-size: cover;
+        font-family: 'Noto Kufi Arabic', sans-serif;
+    }
+    .containe {
+      max-width: 1000px;
+      height: 700px;
+      border-radius: 20px;
+      margin: 0 auto;
+      margin-top: 50px;
+      background-color: #A8E8DA;
+      opacity: .8;
+      background-repeat: no-repeat;
+      margin-bottom: 150px;
+
+    }
+    .form-group{
+        text-align: right;
+    }
+    .form{
+        padding-top: 10px;
+    }
+    .form-group label {
+      font-weight: bold;
+    }
+    .form-group input {
+        background-color: #F0F0F0;
+        
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      
+    }
+    .form-group input:focus {
+      outline: none;
+      box-shadow: 0 0 5px #6c757d;
+    }
+    .btn-primary {
+        margin-top: 20px;
+        border-radius: 10px;
+      padding: 10px 20px;
+      font-weight: bold;
+    }
+   
+    .btn-link {
+        
+      font-weight: bold;
+      border-radius: 5%;
+    }
+    .leftside{
+        background-color: #ffffff;
+        margin-top: 20px;
+        border-radius: 20px;
+        height: 680px;
+    }
+   .down{
+    padding-top: 20px;
+   }
+    .btnn{
+     margin-right: 50px;
+    max-width: 80%;
+    }
+  .rightside{
+    padding-top: 170px;
+    text-align: right;
+    color: rgb(12, 64, 235);
+    padding-right: 50px;
+  }
+    
+  </style>
+    <script src="https://kit.fontawesome.com/ddf16626a9.js" crossorigin="anonymous"></script>
+
+
+<body class='bg'>
+  <div class="containe">
+    <div class="row">
+      <div class="col-sm-6 rightside">
+        <i class="fa-solid fa-cart-shopping fa-flip fa-9x" style="color: rgb(12, 64, 235);"></i>
+           <h2>إنضم إلينا الآن !</h2> 
+        <p>متجر كلية الإقتصاد المنزلي جامعة العريش</p>
+
+      </div>
+      <div class="col-sm-6 leftside">
+        <div class="text-center down">
+          <h2>إنشاء حساب </h2>
+          <p> منتجات محلية صنعت بأيادي مصرية   </p>
+        </div>
+        <form class="form" method="POST" action="{% url 'register_view' %}">
+          {% csrf_token %}
+          <div class="form-row form-group" style="text-align: right;">
+            <div class="col-md-6 mb-3">
+              <label for="id_first_name">الإسم الاول</label>
+              <input type="text" class="form-control" id="id_first_name" name="first_name" placeholder="أحمد" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="id_last_name">الإسم الاخير</label>
+              <input type="text" class="form-control" id="id_last_name" name="last_name" placeholder="حسين" required>
+            </div>
+          </div>
+          <div class="form-row form-group" style="text-align: right;">
+            <div class="col-md-12 mb-6">
+              <label for="id_email">البريد الإلكتروني</label>
+              <input type="email" class="form-control" id="id_email" name="email" placeholder="example@gmail.com" required>
+            </div>
+          </div>
+          <div class="form-row form-group" style="text-align: right;">
+            <div class="col-md-6 mb-3">
+              <label for="id_password1">كلمة المرور</label>
+              <input type="password" class="form-control" id="id_password1" name="password1" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="id_password2">تأكيد كلمة المرور</label>
+              <input type="password" class="form-control" id="id_password2" name="password2" required>
+            </div>
+          </div>
+          {% if form.errors %}
+          <div class="alert alert-danger" style="text-align: right; " role="alert">
+            <p style="margin: 0;">برجاء إدخال البريد الإلكتروني بشكل صحيح</p>
+            <p style="margin: 0;">كلمة المرور قصيرة للغاية يرجي كتابة 8 أحرف علي الاقل     </p>
+        
+          </div>
+        {% endif %}
+          <button type="submit" class="btn btn-primary btn-block btnn">إنشاء حساب</button>
+          <div class="text-center mt-3">
+            <p>أو إنشاء حساب بإستخدام</p>
+            <a href="" class="link"><i class="fa-brands fa-facebook fa-xl"></i></a>
+            <a href=""><i class="fa-brands fa-google fa-xl"></i></a>
+          </div>
+          <div class="text-center mt-3">
+            <a href=""><button type="button" class="btn btn-link">تسجيل الدخول</button></a>
+          </div>
+        
+        </form>
+        
+      </div>
+    </div>
+  </div>
+
+</body>
+{% endblock body %}

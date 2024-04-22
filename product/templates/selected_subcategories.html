@@ -1,0 +1,6 @@
+<!-- selected_subcategories.html -->
+{% for subcategory in selected_subcategories %}
+    <li class="nav-item2" style="display: inline-block; ">
+        <a class="nav-link" href="{% url 'subcategory_products' subcategory_id=subcategory.Subcategory_id %}">{{ subcategory.Name }}</a>
+    </li>
+{% endfor %}

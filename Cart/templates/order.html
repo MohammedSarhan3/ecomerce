@@ -1,0 +1,79 @@
+{% extends "main.html" %}
+{% load static %}
+
+{% block title %}<title>الطلب</title>{% endblock title %}
+
+{% block body %}
+<style>
+    .order-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        margin: 40px;
+    }
+
+    .order-table th, .order-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: right;
+    }
+
+    .delete-button {
+        background-color: #bd0013;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+</style>
+<link rel="stylesheet" href="{% static 'css/order.css' %}">
+<!--checkout.html.html-->
+<div class="container" style="padding-top: 20px;">
+    <h2 dir="rtl">جميع الطلبات</h2>
+
+    <table class="order-table" dir="rtl">
+        <thead>
+            <tr>
+                <th>رقم الطلب</th>
+                <th>الاسم</th>
+                <th>العنوان</th>
+                <th>الحالة</th>
+                <th>تكلفة الشحن</th>
+                <th>السعر الإجمالي</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for other_order in all_orders %}
+                <tr>
+                    <td>{{ other_order.Order_id }}</td>
+                    <td>{{ other_order.Name }}</td>
+                   
+                    
+                    
+                    <td>{{ other_order.Adress }}</td>
+                    <td style="color: green;">{{ other_order.Status }}</td>
+                    <td>{{ other_order.Shipping_cost }}</td>
+                    <td>{{ other_order.Total_price }}</td>
+                    <!-- Add other details you want to display for each order -->
+    
+                    <!-- Button to delete the order -->
+                    <td style="text-align: center;">
+                        <form action="{% url 'delete_order' order_id=other_order.Order_id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="delete-button" onclick="return confirm('هل أنت متأكد أنك تريد حذف هذا الطلب؟')">حذف الطلب</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    
+    
+
+    <!-- end row -->
+
+</div>
+
+{% endblock body %}
